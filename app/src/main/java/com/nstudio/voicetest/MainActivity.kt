@@ -43,12 +43,18 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        val mList = MutableLiveData<ArrayList<Voice>>()
+        val defText = "Hello Good Morning! My name is amy"
+        etText.setText(defText)
 
-        val text = "Hello Good Morning! My name is amy"
+        val mList = MutableLiveData<ArrayList<Voice>>()
 
         val onVoiceSelectedListener = object : VoiceAdapter.OnVoiceSelectedListener {
             override fun onVoiceSelected(voice: Voice) {
+                var text = etText.text.toString().trim()
+                if (text.isEmpty()) {
+                    text = defText
+                }
+
                 textToSpeech.setVoice(voice, text)
             }
         }
